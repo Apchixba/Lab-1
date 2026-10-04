@@ -65,8 +65,8 @@ def draw_diamond():
                 else:
                     offset += step
                     lenght -= step * 2
-            print(f'\x1b[{height + 2}A')
-            print(f'\x1b[{offset}D')
+            print(f'\x1b[{height + 1}A')
+            # print(f'\x1b[{5}D')
             lenght = 1
             offset = height // 2
             time.sleep(2)
@@ -74,9 +74,9 @@ def draw_diamond():
 
 
 
-#loading_multiple(3)
+# loading_multiple(3)
 #flag()
-#draw_diamond()
+draw_diamond()
 
 file = open('sequence.txt', 'r')
 list = []

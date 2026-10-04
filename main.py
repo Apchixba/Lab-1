@@ -14,9 +14,9 @@ plot_list = [[0 for i in range(10)] for i in range(10)]
 result = [0 for i in range(10)]
 
 for i in range(10):
-    result[i] = i ** 3
+    result[i] = i / 3
 
-step = round(abs(result[0] - result[9]) / 9, 2)
+step = round(abs(result[0] - result[9]) / 9, 6)
 print(step)
 
 for i in range(10):
@@ -35,21 +35,10 @@ for i in range(9):
     line = ''
     for j in range(10):
         if j == 0:
-            line += '\t' + str(int(plot_list[i][j])) + '\t'
+            line += '\t' + str(round(plot_list[i][j], 2)) + '\t'
         if plot_list[i][j] == 0:
             line += '--'
         if plot_list[i][j] == 1:
             line += '!!'
     print(line)
 print('\t0\t1 2 3 4 5 6 7 8 9')
-
-for i in range(10):
-    #print(plot_list[i])
-    pass
-
-file = open('sequence.txt', 'r')
-list = []
-for number in file:
-    list.append(float(number))
-file.close()
-print(list)

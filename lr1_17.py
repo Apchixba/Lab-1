@@ -55,12 +55,15 @@ def diamond():
             for i in range(height):
                 for j in range(lenght):
                     if abs((i - 13) ** 2 + (j - 36) ** 2 - 100) <= 35 or abs((i - 13) ** 2 + (j - 59) ** 2 - 100) <= 35:
-                        print(f"\u001b[48;5;{color}m" + pixel, end='')
+                        print(f"\x1b[48;5;{color}m" + pixel, end='')
                     else:
                         print(RED + pixel, end='')
-                print(RESET)
+                # print(100 * f"\x1b[48;5;{color}m{pixel}{RESET}")
+                print("\x1b[0m")
             
-            print(f'\033[{height}A')
+            print(f'\x1b[{height + 1}A', end="")
+            # print(" "  * 100)
+            # print(f'\x1b[{10}D')
             time.sleep(1)
 
 
@@ -79,7 +82,7 @@ def sequence():
     print(f'{RED}{" " * int(len(evens) / 5)}{RESET} {len(evens)/(len(odds) + len(evens)) * 100}%')
 
 
-flag() # 1
-usor() # 2
-# diamond() # 3
-sequence() # 4
+# flag() # 1
+# usor() # 2
+diamond() # 3
+# sequence() # 4
