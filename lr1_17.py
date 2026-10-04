@@ -1,5 +1,6 @@
 import time
 import sys
+import os
 
 
 BLUE = '\u001b[44m'
@@ -11,57 +12,56 @@ BEGIN = '\x1B[1G'
 
 
 def flag():
-    pixel = '    '
+    pixel = ' '
     lenght = 10
-    height = lenght
+    height = 10
 
     for i in range(height):
-        if i < height // 2:
-            print(BLUE + pixel * (i + 1) + WHITE + pixel * (lenght - i) + RESET)
-        else:
-            print(BLUE + pixel * (lenght - i) + RED + pixel * (i + 1) + RESET)
+        for j in range(lenght):
+            if (3 < i < 6 and 1 < j < 8) or (1 < i < 8 and 3 < j < 6):
+                print(WHITE + pixel, end='')
+            else:
+                print(RED + pixel, end='')
+        print(RESET)
 
 
-def loading():
-    for i in range(100):
-        print(f'\u001b[20DLoading... {i+1}%', end='', flush=True)
-        time.sleep(0.1)
-    print(" Done!")
+def usor():
+    pixel = ' '
+    lenght = 100
+    height = 30
 
-
-def multiple_progressbar(num_tasks):
-    bar_width = 25
-    for task in range(1, num_tasks+1):
-        for progress in range(1, bar_width+1):
-            bar = '#' * progress + '_' * (bar_width - progress)
-            print(f'{BEGIN}Task {task}/{num_tasks} [{bar}] {progress * 4}%', end='', flush=True)
-            time.sleep(0.1)
-    print(" Done")
-
+    for i in range(height):
+        for j in range(lenght):
+            if abs((i - 15) ** 2 + (j - 36) ** 2 - 100) <= 35 or abs((i - 15) ** 2 + (j - 59) ** 2 - 100) <= 35:
+                print(WHITE + pixel, end='')
+            else:
+                print(RED + pixel, end='')
+        print(RESET)
 
 def diamond():
-    height = 15
-    center = height // 2
-    offset = height // 2
-    step = 1
-    lenght = 1
-    colors = [87, 196, 226]
+    os.system("cls")
+    pixel = ' '
+    lenght = 100
+    height = 27
+
+    # center = height // 2
+    # offset = height
+    # step = 1
+    # lenght = 1
+    colors = [200, 100, 10]
 
     while True:
         for color in colors:
-            for line in range(height):
-                print(f'{' ' * offset}\u001b[48;5;{color}m{' ' * lenght}{RESET}')
-                if line < center:
-                    offset -= step
-                    lenght += step * 2
-                else:
-                    offset += step
-                    lenght -= step * 2
-            print(f'\u001b[{height + 2}A')
-            print(f'\u001b[{offset+1}D')
-            lenght = 1
-            offset = height // 2
-            time.sleep(2)
+            for i in range(height):
+                for j in range(lenght):
+                    if abs((i - 13) ** 2 + (j - 36) ** 2 - 100) <= 35 or abs((i - 13) ** 2 + (j - 59) ** 2 - 100) <= 35:
+                        print(f"\u001b[48;5;{color}m" + pixel, end='')
+                    else:
+                        print(RED + pixel, end='')
+                print(RESET)
+            
+            print(f'\033[{height}A')
+            time.sleep(1)
 
 
 def sequence():
@@ -69,19 +69,17 @@ def sequence():
     odds = []
     evens = []
     for line in file:
-        if int(float(line) * 100) % 2 == 0:
+        if -3 < float(line) <= 3:
             odds.append(float(line))
         else:
             evens.append(float(line))
     file.close()
     # print(len(odds), len(evens))
-    print(f'{BLUE}{' ' * int(len(odds) / 5)}{RESET} {len(odds)/(len(odds) + len(evens)) * 100}%')
-    print(f'{RED}{' ' * int(len(evens) / 5)}{RESET} {len(evens)/(len(odds) + len(evens)) * 100}%')
+    print(f'{BLUE}{" " * int(len(odds) / 5)}{RESET} {len(odds)/(len(odds) + len(evens)) * 100}%')
+    print(f'{RED}{" " * int(len(evens) / 5)}{RESET} {len(evens)/(len(odds) + len(evens)) * 100}%')
 
 
-#flag()
-#loading()
-#m = int(sys.argv[1]) if len(sys.argv) > 1 else 3
-#multiple_progressbar(m)
-# diamond()
-sequence()
+flag() # 1
+usor() # 2
+# diamond() # 3
+sequence() # 4
